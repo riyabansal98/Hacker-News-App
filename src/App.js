@@ -47,27 +47,37 @@ const App = () => {
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <Search search={searchTerm} onSearch={handleSearch}/>
+      <InputWithLabel
+        id="search"
+        label="Search"
+        value={searchTerm}
+        onInputChange={handleSearch}
+      />
       <hr />
       <List list={searchedStories} />
     </div>
   );
 };
 
-const Search = ({search, onSearch}) => (
+const InputWithLabel = ({
+  id,
+  label,
+  value,
+  type='text',
+  onInputChange,
+}) => (
   <>
-  <label key="1" htmlFor="search">Search:{' '}</label> 
+  <label htmlFor={id}>{label}</label> 
+  &nbsp;
   <input 
-    key="2"
-    id="search" 
-    type="text" 
-    onChange={onSearch}
-    value={search}
+    id={id} 
+    type={type}
+    onChange={onInputChange}
+    value={value}
   />
   </>
 );
   
-
 const List = ({list}) =>  list.map(item => <Item key={item.objectID} item={item}/>);
 
 const Item = ({ item }) => (
